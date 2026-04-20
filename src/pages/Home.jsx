@@ -85,6 +85,7 @@ export default function Home() {
       document.querySelectorAll('.section-title').forEach(el => reveal(el, { y: 30 }))
 
       reveal('.work-proj-row', { y: 28, stagger: 0.07, end: 'top 40%' })
+      reveal('.proj-card--mob', { y: 40, stagger: 0.1, end: 'top 45%' })
 
       reveal('.about-photo', { x: -40, y: 0, end: 'top 50%' })
       reveal('.about-label', { y: 20 })
@@ -224,9 +225,27 @@ export default function Home() {
             </h2>
           </div>
         </div>
-        <div className="work-proj-list">
+        {/* Desktop: lista righe */}
+        <div className="work-proj-list work-proj-list--desktop">
           {featured.map(p => (
             <ProjRow key={p.slug} p={p} lang={lang} />
+          ))}
+        </div>
+        {/* Mobile: card griglia */}
+        <div className="proj-grid proj-grid--mobile">
+          {featured.map(p => (
+            <Link key={p.slug} to={`/projects/${p.slug}`} className="proj-card proj-card--mob">
+              <div className={`proj-cover cover-tint-${p.area}`}>
+                {p.cover && <img src={p.cover} alt={p.title[lang]} className="proj-cover-img" />}
+                <div className="cover-inner">
+                  <span className="cover-num">{p.num}</span>
+                  <div>
+                    <div className="cover-title">{p.title[lang]}<span className="tdot">.</span></div>
+                    <div className="cover-footer"><span className="cover-year">{p.year}</span></div>
+                  </div>
+                </div>
+              </div>
+            </Link>
           ))}
         </div>
         <div style={{ marginTop: 48, display: 'flex', justifyContent: 'flex-end' }}>
