@@ -401,8 +401,10 @@ html { scrollbar-color: var(--line) var(--bg); scrollbar-width: thin; }
 /* project cover cards (home) */
 .proj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
 @media (max-width: 820px) { .proj-grid { grid-template-columns: 1fr; gap: 24px; } }
-.proj-card { display: flex; flex-direction: column; gap: 14px; text-decoration: none; color: inherit; border-radius: 12px; overflow: hidden; }
-.proj-cover { position: relative; aspect-ratio: 3/2; overflow: hidden; border: 1px solid var(--line); background: #0e0e0e; isolation: isolate; border-radius: 12px; }
+.proj-card { display: flex; flex-direction: column; gap: 14px; text-decoration: none; color: inherit; border-radius: 18px; overflow: hidden; }
+.proj-cover { position: relative; aspect-ratio: 3/2; overflow: hidden; border: 1px solid var(--line); background: #0e0e0e; isolation: isolate; border-radius: 18px; box-shadow: 0 8px 40px rgba(0,0,0,0.45), 0 2px 8px rgba(0,0,0,0.25); }
+.card-arrow-btn { position: absolute; bottom: 14px; right: 14px; z-index: 6; width: 40px; height: 40px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; mix-blend-mode: difference; }
+.card-arrow-btn svg { width: 16px; height: 16px; color: #000; }
 .proj-cover-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; filter: saturate(0.65) contrast(1.05); transition: transform .6s cubic-bezier(.2,.7,.2,1); }
 .proj-card:hover .proj-cover-img { transform: scale(1.06); }
 .proj-cover::before { content: ""; position: absolute; inset: 0; z-index: 1; background:
