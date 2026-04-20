@@ -45,22 +45,26 @@ export default function Loader({ onComplete }) {
       },
     }, 0)
 
-    // nome entra dall'alto in stagger per parola
-    tl.from('.ln-word', {
-      yPercent: -120,
-      opacity: 0,
-      duration: 0.7,
-      stagger: 0.12,
-      ease: 'power3.out',
-    }, 0.2)
+    const isMobile = window.innerWidth < 900
 
-    // ruolo e tag entrano
-    tl.from('.ln-meta', {
-      opacity: 0,
-      x: -20,
-      duration: 0.5,
-      ease: 'power2.out',
-    }, 0.6)
+    if (!isMobile) {
+      // nome entra dall'alto in stagger per parola
+      tl.from('.ln-word', {
+        yPercent: -120,
+        opacity: 0,
+        duration: 0.7,
+        stagger: 0.12,
+        ease: 'power3.out',
+      }, 0.2)
+
+      // ruolo e tag entrano
+      tl.from('.ln-meta', {
+        opacity: 0,
+        x: -20,
+        duration: 0.5,
+        ease: 'power2.out',
+      }, 0.6)
+    }
 
     // hold breve
     tl.to({}, { duration: 0.2 })
