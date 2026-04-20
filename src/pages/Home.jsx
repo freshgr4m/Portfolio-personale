@@ -238,10 +238,12 @@ export default function Home() {
               <div className={`proj-cover cover-tint-${p.area}`}>
                 {p.cover && <img src={p.cover} alt={p.title[lang]} className="proj-cover-img" />}
                 <div className="cover-inner">
-                  <span className="cover-num">{p.num}</span>
-                  <div>
+                  <div className="cover-topbar">
+                    <span className="cover-num">{p.num} · {p.year}</span>
+                    <span className="cover-tag">{AREA_LABEL[p.area]}</span>
+                  </div>
+                  <div className="cover-bottom">
                     <div className="cover-title">{p.title[lang]}<span className="tdot">.</span></div>
-                    <div className="cover-footer"><span className="cover-year">{p.year}</span></div>
                   </div>
                 </div>
                 <div className="card-arrow-btn">
@@ -316,6 +318,10 @@ export default function Home() {
         <div className="skills-grid">
           {SKILLS.map(s => (
             <div key={s.num} className="skill-col">
+              <div className="skill-col-label">
+                <div className="skill-num">{s.num} —</div>
+                <h3 className="skill-title">{s.title[lang]}</h3>
+              </div>
               <div className="skill-num">{s.num} —</div>
               <h3 className="skill-title">{s.title[lang]}</h3>
               <div className="skill-icons">
