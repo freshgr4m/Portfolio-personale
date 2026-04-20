@@ -42,7 +42,7 @@ export default function App() {
   return (
     <LangProvider>
       <LoadedProvider>
-        <BrowserRouter>
+        <BrowserRouter basename="/Portfolio-personale">
           <AppInner />
         </BrowserRouter>
       </LoadedProvider>
