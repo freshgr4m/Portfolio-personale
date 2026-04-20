@@ -159,7 +159,7 @@ export default function ProjectDetail() {
 
       {/* ── PAGINATION ── */}
       {prev && next && (
-        <nav className="post-nav">
+        <nav className="post-nav post-nav--projects">
           <Link to={`/projects/${prev.slug}`}>
             <span className="post-nav-label">← {t('Progetto precedente', 'Previous project')}</span>
             <span className="post-nav-title">{prev.title[lang]}<span className="tdot">.</span></span>
