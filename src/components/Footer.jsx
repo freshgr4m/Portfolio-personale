@@ -1,10 +1,11 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useLang } from '../context/LangContext'
 import { scrollToSection } from '../utils/scrollTo'
 
 export default function Footer() {
   const { lang } = useLang()
   const t = (it, en) => (lang === 'it' ? it : en)
+  const navigate = useNavigate()
 
   return (
     <footer className="footer-main">
@@ -18,8 +19,8 @@ export default function Footer() {
         <Link to="/">Home</Link>
         <Link to="/projects">{t('Lavori', 'Work')}</Link>
         <Link to="/journal">Journal</Link>
-        <button onClick={() => scrollToSection('about')} className="footer-anchor-btn">{t('Chi sono', 'About')}</button>
-        <button onClick={() => scrollToSection('contact')} className="footer-anchor-btn">{t('Contatti', 'Contact')}</button>
+        <button onClick={() => scrollToSection('about', navigate)} className="footer-anchor-btn">{t('Chi sono', 'About')}</button>
+        <button onClick={() => scrollToSection('contact', navigate)} className="footer-anchor-btn">{t('Contatti', 'Contact')}</button>
       </div>
 
       <div className="footer-col footer-col--social">

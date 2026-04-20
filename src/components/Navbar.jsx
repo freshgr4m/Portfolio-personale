@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from 'react'
-import { Link, NavLink, useLocation } from 'react-router-dom'
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { scrollToSection } from '../utils/scrollTo'
 import { useLang } from '../context/LangContext'
 import { gsap } from 'gsap'
@@ -90,6 +90,7 @@ export default function Navbar() {
     }
   }, [open])
 
+  const navigate = useNavigate()
   const links = [
     { to: '/', label: t('Index', 'Index'), end: true },
     { to: '/projects', label: t('Lavori', 'Work') },
@@ -102,7 +103,7 @@ export default function Navbar() {
 
   function scrollTo(id) {
     setOpen(false)
-    scrollToSection(id)
+    scrollToSection(id, navigate)
   }
 
   return (

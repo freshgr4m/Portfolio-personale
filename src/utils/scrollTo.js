@@ -1,4 +1,4 @@
-export function scrollToSection(id, offset = -80) {
+export function scrollToSection(id, navigate, offset = -80) {
   const doScroll = () => {
     const el = document.getElementById(id)
     if (!el) return
@@ -11,8 +11,8 @@ export function scrollToSection(id, offset = -80) {
   }
   if (document.getElementById(id)) {
     doScroll()
-  } else {
-    window.location.href = '/'
+  } else if (navigate) {
+    navigate('/')
     setTimeout(doScroll, 400)
   }
 }
