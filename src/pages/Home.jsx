@@ -232,7 +232,7 @@ export default function Home() {
           ))}
         </div>
         {/* Mobile: card griglia */}
-        <div className="proj-grid proj-grid--mobile">
+        <div className="proj-grid--mobile">
           {featured.map(p => (
             <Link key={p.slug} to={`/projects/${p.slug}`} className="proj-card proj-card--mob">
               <div className={`proj-cover cover-tint-${p.area}`}>
@@ -301,7 +301,7 @@ export default function Home() {
           </div>
         </div>
         <div className="about-photo">
-          <img src="/assets/portrait.png" alt={t('Ritratto', 'Portrait')} />
+          <img src={`${import.meta.env.BASE_URL}assets/portrait.png`} alt={t('Ritratto', 'Portrait')} />
         </div>
       </section>
 

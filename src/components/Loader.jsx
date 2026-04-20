@@ -26,9 +26,6 @@ export default function Loader({ onComplete }) {
     gridRef.current.appendChild(frag)
     const blocks = gridRef.current.querySelectorAll('.loader-block')
 
-    gsap.set('.ln-word', { yPercent: -120, opacity: 0 })
-    gsap.set('.ln-meta', { opacity: 0, x: -20 })
-
     const tl = gsap.timeline({
       onComplete: () => {
         if (overlayRef.current) overlayRef.current.style.display = 'none'
@@ -47,25 +44,6 @@ export default function Loader({ onComplete }) {
           counterRef.current.textContent = String(Math.floor(count.val)).padStart(2, '0')
       },
     }, 0)
-
-    const isMobile = window.innerWidth < 900
-
-    if (!isMobile) {
-      tl.to('.ln-word', {
-        yPercent: 0,
-        opacity: 1,
-        duration: 0.7,
-        stagger: 0.12,
-        ease: 'power3.out',
-      }, 0.2)
-
-      tl.to('.ln-meta', {
-        opacity: 1,
-        x: 0,
-        duration: 0.5,
-        ease: 'power2.out',
-      }, 0.6)
-    }
 
     // hold breve
     tl.to({}, { duration: 0.2 })
@@ -110,24 +88,11 @@ export default function Loader({ onComplete }) {
           <span className="ln-label">2026</span>
         </div>
 
-        {/* corpo principale: numero a sinistra, nome a destra */}
+        {/* corpo principale: solo counter */}
         <div className="ln-body">
           <div className="ln-counter-wrap">
             <span className="ln-counter" ref={counterRef}>00</span>
             <span className="ln-counter-pct">%</span>
-          </div>
-          <div className="ln-right">
-            <div className="ln-name">
-              <div className="ln-name-line"><span className="ln-word">Francesco</span></div>
-              <div className="ln-name-line"><span className="ln-word">Mancino<span className="ln-dot">.</span></span></div>
-            </div>
-            <div className="ln-meta">
-              <span>Frontend</span>
-              <span className="ln-sep">—</span>
-              <span>AI Developer</span>
-              <span className="ln-sep">—</span>
-              <span>Roma, IT</span>
-            </div>
           </div>
         </div>
 
