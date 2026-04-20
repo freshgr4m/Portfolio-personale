@@ -12,7 +12,6 @@ export default function ProjectDetail() {
   const { lang } = useLang()
   const t = (it, en) => (lang === 'it' ? it : en)
   const pageRef = useRef(null)
-  const heroImgRef = useRef(null)
 
   const idx = PROJECTS.findIndex(p => p.slug === slug)
   const p = PROJECTS[idx]
@@ -21,39 +20,40 @@ export default function ProjectDetail() {
   useEffect(() => {
     if (!p) return
     const ctx = gsap.context(() => {
-      // title reveal
       gsap.set('.pd-title-word', { yPercent: 110 })
-      gsap.set('.pd-meta-strip', { opacity: 0, y: 20 })
-      gsap.set('.pd-desc', { opacity: 0, y: 24 })
+      gsap.set('.pd-header-tag', { opacity: 0, y: 10 })
+      gsap.set('.pd-meta-row', { opacity: 0, y: 14 })
+      gsap.set('.pd-brief', { opacity: 0, y: 18 })
 
       const tl = gsap.timeline({ defaults: { ease: 'power4.out' } })
-      tl.to('.pd-title-word', { yPercent: 0, duration: 1, stagger: 0.1 }, 0.1)
-        .to('.pd-meta-strip', { opacity: 1, y: 0, duration: 0.7 }, 0.5)
-        .to('.pd-desc', { opacity: 1, y: 0, duration: 0.7 }, 0.65)
+      tl.to('.pd-header-tag', { opacity: 1, y: 0, duration: 0.5 }, 0.05)
+        .to('.pd-title-word', { yPercent: 0, duration: 1, stagger: 0.09 }, 0.15)
+        .to('.pd-meta-row',  { opacity: 1, y: 0, duration: 0.6 }, 0.55)
+        .to('.pd-brief',     { opacity: 1, y: 0, duration: 0.6 }, 0.68)
 
-      // hero image parallax
-      if (heroImgRef.current) {
-        gsap.to(heroImgRef.current, {
-          yPercent: 15,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: '.pd-hero-img',
-            start: 'top top',
-            end: 'bottom top',
-            scrub: true,
-          },
-        })
-      }
-
-      // scroll reveals
-      gsap.from('.pd-info-col', { opacity: 0, y: 40, duration: 0.8, ease: 'power3.out',
-        scrollTrigger: { trigger: '.pd-content', start: 'top 85%', once: true }
+      gsap.from('.pd-gal-main', {
+        opacity: 0, y: 44, duration: 1, ease: 'power3.out',
+        scrollTrigger: { trigger: '.pd-gallery', start: 'top 88%', once: true },
       })
-      gsap.from('.pd-body-col', { opacity: 0, y: 40, duration: 0.8, ease: 'power3.out', delay: 0.1,
-        scrollTrigger: { trigger: '.pd-content', start: 'top 85%', once: true }
+      gsap.from('.pd-gal-side', {
+        opacity: 0, y: 44, duration: 1, ease: 'power3.out', delay: 0.12,
+        scrollTrigger: { trigger: '.pd-gallery', start: 'top 88%', once: true },
       })
-      gsap.from('.pd-next-row', { opacity: 0, y: 32, duration: 0.8, ease: 'power3.out',
-        scrollTrigger: { trigger: '.pd-next-row', start: 'top 90%', once: true }
+      gsap.from('.pd-gal-row img', {
+        opacity: 0, y: 36, duration: 0.8, ease: 'power3.out', stagger: 0.1,
+        scrollTrigger: { trigger: '.pd-gal-row', start: 'top 88%', once: true },
+      })
+      gsap.from('.pd-info-col', {
+        opacity: 0, y: 36, duration: 0.8, ease: 'power3.out',
+        scrollTrigger: { trigger: '.pd-content', start: 'top 85%', once: true },
+      })
+      gsap.from('.pd-body-col', {
+        opacity: 0, y: 36, duration: 0.8, ease: 'power3.out', delay: 0.1,
+        scrollTrigger: { trigger: '.pd-content', start: 'top 85%', once: true },
+      })
+      gsap.from('.pd-next-row', {
+        opacity: 0, y: 28, duration: 0.7, ease: 'power3.out',
+        scrollTrigger: { trigger: '.pd-next-row', start: 'top 90%', once: true },
       })
     }, pageRef)
     return () => ctx.revert()
@@ -64,12 +64,14 @@ export default function ProjectDetail() {
       <div>
         <h1>404</h1>
         <p className="mono">{t('Progetto non trovato', 'Project not found')}</p>
-        <Link to="/projects" className="mono" style={{ color: 'var(--accent)', marginTop: 20, display: 'inline-block' }}>
+        <Link to="/projects" style={{ color: 'var(--accent)', marginTop: 20, display: 'inline-block' }} className="mono">
           ← {t('Torna ai lavori', 'Back to work')}
         </Link>
       </div>
     </div>
   )
+
+  const imgs = p.images?.length ? p.images : p.cover ? [p.cover] : []
 
   return (
     <div className="page-enter" ref={pageRef}>
@@ -77,6 +79,12 @@ export default function ProjectDetail() {
       {/* ── HEADER ── */}
       <div className="pd-header wrap">
         <Link to="/projects" className="pd-back">← {t('Tutti i lavori', 'All work')}</Link>
+
+        <div className="pd-header-top">
+          <span className="section-num">N° {p.num}</span>
+          <span className="pd-header-tag cover-tag">{AREA_LABEL[p.area]}</span>
+        </div>
+
         <div className="pd-title-wrap">
           {p.title[lang].split(' ').map((word, i) => (
             <div key={i} className="pd-title-clip">
@@ -87,50 +95,87 @@ export default function ProjectDetail() {
             <span className="pd-title-word"><span className="tdot">.</span></span>
           </div>
         </div>
-        <div className="pd-meta-strip">
-          <span className="pd-meta-item">{p.num} / {String(PROJECTS.length).padStart(2, '0')}</span>
-          <span className="pd-meta-sep">—</span>
-          <span className="pd-meta-item">{p.year}</span>
-          <span className="pd-meta-sep">—</span>
-          <span className="pd-meta-item">{p.role[lang]}</span>
-          <span className="pd-meta-sep">—</span>
-          <span className="pd-meta-item pd-meta-area">{AREA_LABEL[p.area]}</span>
+
+        <div className="pd-meta-row">
+          <span className="mono">{p.year}</span>
+          <span className="pd-meta-sep mono">·</span>
+          <span className="mono">{p.role[lang]}</span>
+          <span className="pd-meta-sep mono">·</span>
+          <span className="mono" style={{ color: 'var(--accent)' }}>{AREA_LABEL[p.area]}</span>
         </div>
-        <p className="pd-desc">{p.desc[lang]}</p>
+
+        <p className="pd-brief">{p.desc[lang]}</p>
       </div>
 
-      {/* ── HERO IMAGE ── */}
-      {p.cover && (
-        <div className="pd-hero-img">
-          <img src={p.cover} alt={p.title[lang]} ref={heroImgRef} />
+      {/* ── GALLERY 5 IMMAGINI ── */}
+      {imgs.length > 0 && (
+        <div className="pd-gallery wrap">
+          {/* Riga 1: immagine grande + 1 laterale */}
+          <div className="pd-gal-top">
+            <div className="pd-gal-main">
+              <img src={imgs[0]} alt={p.title[lang]} />
+            </div>
+            {imgs[1] && (
+              <div className="pd-gal-side">
+                <img src={imgs[1]} alt={`${p.title[lang]} 2`} />
+              </div>
+            )}
+          </div>
+
+          {/* Riga 2: 3 immagini uguali */}
+          {imgs.slice(2, 5).length > 0 && (
+            <div className="pd-gal-row">
+              {imgs.slice(2, 5).map((src, i) => (
+                <img key={i} src={src} alt={`${p.title[lang]} ${i + 3}`} />
+              ))}
+            </div>
+          )}
         </div>
       )}
 
       {/* ── CONTENT ── */}
       <div className="pd-content wrap">
+
+        {/* Colonna sinistra: info + stack + cta */}
         <div className="pd-info-col">
-          <div className="pd-label">{t('Stack', 'Stack')}</div>
-          <div className="pd-stack">
-            {p.stack.map(s => <span key={s} className="pd-chip">{s}</span>)}
+          <div className="pd-info-block">
+            <span className="mono pd-label-sm">{t('Stack', 'Stack')}</span>
+            <div className="pd-stack">
+              {p.stack.map(s => <span key={s} className="stack-pill">{s}</span>)}
+            </div>
           </div>
-          <div className="pd-info-row">
-            <div className="pd-label">{t('Ruolo', 'Role')}</div>
+
+          <div className="pd-info-block">
+            <span className="mono pd-label-sm">{t('Ruolo', 'Role')}</span>
             <div className="pd-info-val">{p.role[lang]}</div>
           </div>
-          <div className="pd-info-row">
-            <div className="pd-label">{t('Anno', 'Year')}</div>
+
+          <div className="pd-info-block">
+            <span className="mono pd-label-sm">{t('Anno', 'Year')}</span>
             <div className="pd-info-val">{p.year}</div>
           </div>
-          <div className="pd-info-row">
-            <div className="pd-label">{t('Area', 'Area')}</div>
+
+          <div className="pd-info-block">
+            <span className="mono pd-label-sm">{t('Area', 'Area')}</span>
             <div className="pd-info-val">{AREA_LABEL[p.area]}</div>
+          </div>
+
+          <div className="pd-ctas">
+            <a href="mailto:hello@francescomancino.dev" className="hero-cta-primary">
+              {t('Scrivimi', 'Get in touch')} ↗
+            </a>
+            <Link to="/projects" className="hero-cta-secondary">
+              {t('Tutti i lavori', 'All work')}
+            </Link>
           </div>
         </div>
 
+        {/* Colonna destra: overview */}
         <div className="pd-body-col">
-          <div className="pd-label">{t('Overview', 'Overview')}</div>
+          <span className="mono pd-label-sm">{t('Il Progetto', 'The Project')}</span>
           <p className="pd-long">{p.longDesc[lang]}</p>
         </div>
+
       </div>
 
       {/* ── NEXT PROJECT ── */}
@@ -138,11 +183,15 @@ export default function ProjectDetail() {
         <div className="wrap">
           <Link to={`/projects/${next.slug}`} className="pd-next-row">
             <div>
-              <div className="pd-next-label">{t('Prossimo progetto', 'Next project')}</div>
-              <div className="pd-next-title">{next.title[lang]}<span className="tdot">.</span></div>
+              <div className="mono" style={{ opacity: 0.45, marginBottom: 10 }}>
+                {t('Prossimo progetto', 'Next project')}
+              </div>
+              <div className="pd-next-title">
+                {next.title[lang]}<span className="tdot">.</span>
+              </div>
             </div>
-            <span className="pd-next-arrow">
-              <svg viewBox="0 0 24 24" fill="none" width="20" height="20">
+            <span className="card-arrow-btn" style={{ position: 'static', flexShrink: 0 }}>
+              <svg viewBox="0 0 24 24" fill="none" width="16" height="16">
                 <line x1="5" y1="19" x2="19" y2="5" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
                 <polyline points="8,5 19,5 19,16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>

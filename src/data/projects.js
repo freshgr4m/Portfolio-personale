@@ -19,7 +19,14 @@ export const PROJECTS = [
     area: 'fe',
     featured: true,
     filters: ['fullstack'],
-    cover: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80',
+    cover: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80',
+      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80',
+      'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=800&q=80',
+      'https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&q=80',
+      'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80',
+    ],
   },
   {
     slug: 'gestionale-react',
@@ -39,7 +46,14 @@ export const PROJECTS = [
     area: 'fe',
     featured: true,
     filters: ['fullstack', 'fe'],
-    cover: 'https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=800&q=80',
+    cover: 'https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=1200&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=1200&q=80',
+      'https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=800&q=80',
+      'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&q=80',
+      'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80',
+      'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80',
+    ],
   },
   {
     slug: 'portfolio-lorenzo-piovani',
@@ -59,7 +73,14 @@ export const PROJECTS = [
     area: 'nocode',
     featured: true,
     filters: ['design'],
-    cover: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80',
+    cover: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1200&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1200&q=80',
+      'https://images.unsplash.com/photo-1558655146-d09347e92766?w=800&q=80',
+      'https://images.unsplash.com/photo-1542744094-24638eff58bb?w=800&q=80',
+      'https://images.unsplash.com/photo-1545235617-9465d2a55698?w=800&q=80',
+      'https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=800&q=80',
+    ],
   },
   {
     slug: 'strane-donne',
@@ -79,7 +100,14 @@ export const PROJECTS = [
     area: 'nocode',
     featured: true,
     filters: ['design'],
-    cover: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&q=80',
+    cover: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=1200&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=1200&q=80',
+      'https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=800&q=80',
+      'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800&q=80',
+      'https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=800&q=80',
+      'https://images.unsplash.com/photo-1522542550221-31fd19575a2d?w=800&q=80',
+    ],
   },
 ]
 
