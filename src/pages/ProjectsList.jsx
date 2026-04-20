@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useLang } from '../context/LangContext'
-import { PROJECTS } from '../data/projects'
+import { PROJECTS, AREA_LABEL } from '../data/projects'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -83,21 +83,20 @@ export default function ProjectsList() {
                 <div className={`proj-cover cover-tint-${p.area}`}>
                   {p.cover && <img src={p.cover} alt={p.title[lang]} className="proj-cover-img" />}
                   <div className="cover-inner">
-                    <span className="cover-num">
-                      {p.num} / {String(visible.length).padStart(2, '0')}
-                    </span>
-                    <div>
-                      <div className="cover-title">
-                        {p.title[lang]}<span className="tdot">.</span>
-                      </div>
+                    <div className="cover-topbar">
+                      <span className="cover-num">{p.num} · {p.year}</span>
+                      <span className="cover-tag">{AREA_LABEL[p.area]}</span>
+                    </div>
+                    <div className="cover-bottom">
+                      <div className="cover-title">{p.title[lang]}<span className="tdot">.</span></div>
                       <div className="cover-desc">{p.desc[lang]}</div>
-                      <div className="cover-footer">
-                        <span className="cover-year">{p.year}</span>
-                      </div>
                     </div>
                   </div>
-                  <div className="cover-stack">
-                    {p.stack.slice(0, 4).map(s => <span key={s} className="stack-pill">{s}</span>)}
+                  <div className="card-arrow-btn">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <line x1="5" y1="19" x2="19" y2="5" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                      <polyline points="8,5 19,5 19,16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
                   </div>
                 </div>
               </Link>

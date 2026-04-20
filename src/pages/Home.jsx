@@ -244,6 +244,7 @@ export default function Home() {
                   </div>
                   <div className="cover-bottom">
                     <div className="cover-title">{p.title[lang]}<span className="tdot">.</span></div>
+                    <div className="cover-desc">{p.desc[lang]}</div>
                   </div>
                 </div>
                 <div className="card-arrow-btn">
@@ -256,7 +257,7 @@ export default function Home() {
             </Link>
           ))}
         </div>
-        <div style={{ marginTop: 48, display: 'flex', justifyContent: 'flex-end' }}>
+        <div style={{ marginTop: 48, display: 'flex', justifyContent: 'center' }}>
           <Link to="/projects" className="btn-outline-white">
             {t('Archivio completo', 'Full archive')} →
           </Link>
@@ -349,7 +350,7 @@ export default function Home() {
             <div className="section-num">N° 04 / Journal</div>
             <h2 className="section-title">Journal</h2>
           </div>
-          <Link to="/journal" className="btn-outline-white">
+          <Link to="/journal" className="btn-outline-white journal-cta-desktop">
             {t('Tutti i post', 'All posts')} →
           </Link>
         </div>
@@ -372,6 +373,11 @@ export default function Home() {
               </div>
             </Link>
           ))}
+        </div>
+        <div className="journal-cta-mobile">
+          <Link to="/journal" className="btn-outline-white">
+            {t('Tutti i post', 'All posts')} →
+          </Link>
         </div>
       </section>
 
