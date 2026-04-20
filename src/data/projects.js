@@ -2,15 +2,15 @@ export const AREA_LABEL = { fe: 'FE', design: 'DESIGN', ai: 'AI', nocode: 'NO-CO
 
 export const PROJECTS = [
   {
-    slug: 'gestionale-enterprise',
+    slug: 'stratos',
     num: '01',
-    title: { it: 'Gestionale Enterprise', en: 'Enterprise ERP' },
+    title: { it: 'Stratos', en: 'Stratos' },
     role: { it: 'Full-Stack', en: 'Full-Stack' },
-    client: { it: 'Azienda Enterprise', en: 'Enterprise Co.' },
+    client: { it: 'Stratos Labs', en: 'Stratos Labs' },
     year: '2024',
     desc: {
-      it: 'UI/UX e frontend per applicazione gestionale interna.',
-      en: 'UI/UX and frontend for an internal ERP application.',
+      it: 'Dashboard operativa per team enterprise — dati in tempo reale, zero rumore.',
+      en: 'Operational dashboard for enterprise teams — real-time data, zero noise.',
     },
     problem: {
       it: 'Il team operativo perdeva ore in processi manuali e interfacce datate — dati frammentati, zero visibilità in tempo reale, flussi ridondanti che rallentavano ogni azione.',
@@ -42,15 +42,15 @@ export const PROJECTS = [
     ],
   },
   {
-    slug: 'gestionale-react',
+    slug: 'vella',
     num: '02',
-    title: { it: 'Gestionale React', en: 'React ERP' },
+    title: { it: 'Vella', en: 'Vella' },
     role: { it: 'Full-Stack', en: 'Full-Stack' },
-    client: { it: 'Azienda CRM', en: 'CRM Company' },
+    client: { it: 'Vella Inc.', en: 'Vella Inc.' },
     year: '2025',
     desc: {
-      it: 'Architettura frontend con React e Vite per CRM aziendale.',
-      en: 'Frontend architecture with React and Vite for a company CRM.',
+      it: 'Architettura frontend modulare per una piattaforma CRM in rapida crescita.',
+      en: 'Modular frontend architecture for a fast-growing CRM platform.',
     },
     problem: {
       it: 'Il CRM esistente era lento, difficile da manutenere e non scalabile. Il team di sviluppo perdeva tempo su una base di codice fragile invece di costruire funzionalità.',
@@ -82,15 +82,15 @@ export const PROJECTS = [
     ],
   },
   {
-    slug: 'portfolio-lorenzo-piovani',
+    slug: 'aura',
     num: '03',
-    title: { it: 'Portfolio Lorenzo Piovani', en: 'Lorenzo Piovani Portfolio' },
+    title: { it: 'Aura', en: 'Aura' },
     role: { it: 'Design', en: 'Design' },
-    client: { it: 'Lorenzo Piovani', en: 'Lorenzo Piovani' },
+    client: { it: 'Studio Aura', en: 'Studio Aura' },
     year: '2024',
     desc: {
-      it: 'Portfolio interattivo sviluppato in Framer.',
-      en: 'Interactive portfolio built in Framer.',
+      it: 'Portfolio creativo interattivo con animazioni cinematografiche in Framer.',
+      en: 'Interactive creative portfolio with cinematic animations in Framer.',
     },
     problem: {
       it: 'Il cliente aveva bisogno di un portfolio online che riflettesse la sua identità visiva, con animazioni fluide, senza dipendere da un developer per ogni piccolo aggiornamento.',
@@ -109,7 +109,7 @@ export const PROJECTS = [
       en: "Client's personal portfolio built entirely in Framer — from interactions to scroll animations, down to a no-custom-code publishing flow.",
     },
     stack: ['Framer', 'UI Design', 'Motion', 'CMS'],
-    area: 'nocode',
+    area: 'design',
     featured: true,
     filters: ['design'],
     cover: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1200&q=80',
@@ -122,15 +122,15 @@ export const PROJECTS = [
     ],
   },
   {
-    slug: 'strane-donne',
+    slug: 'solco',
     num: '04',
-    title: { it: 'Strane Donne', en: 'Strane Donne' },
-    role: { it: 'Web', en: 'Web' },
-    client: { it: 'Strane Donne', en: 'Strane Donne' },
+    title: { it: 'Solco', en: 'Solco' },
+    role: { it: 'Web Design', en: 'Web Design' },
+    client: { it: 'Solco Collective', en: 'Solco Collective' },
     year: '2023',
     desc: {
-      it: 'Sito aziendale WordPress.',
-      en: 'WordPress company website.',
+      it: 'Sito editoriale per un collettivo creativo — autonomia totale, SEO solida.',
+      en: 'Editorial website for a creative collective — full autonomy, solid SEO.',
     },
     problem: {
       it: 'Il team aveva bisogno di una presenza online professionale e aggiornabile in autonomia — senza passare da un developer a ogni modifica, con SEO solida fin da subito.',
@@ -159,6 +159,84 @@ export const PROJECTS = [
       'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800&q=80',
       'https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=800&q=80',
       'https://images.unsplash.com/photo-1522542550221-31fd19575a2d?w=800&q=80',
+    ],
+  },
+  {
+    slug: 'aria',
+    num: '05',
+    title: { it: 'Aria', en: 'Aria' },
+    role: { it: 'AI Developer', en: 'AI Developer' },
+    client: { it: 'Aria AI', en: 'Aria AI' },
+    year: '2025',
+    desc: {
+      it: 'Agente conversazionale con RAG su knowledge base proprietaria per supporto clienti.',
+      en: 'Conversational agent with RAG on proprietary knowledge base for customer support.',
+    },
+    problem: {
+      it: 'Il team di supporto gestiva centinaia di ticket ripetitivi ogni giorno, con tempi di risposta lenti e alta variabilità nella qualità delle risposte. La knowledge base esisteva ma non era consultabile in modo intelligente.',
+      en: 'The support team was handling hundreds of repetitive tickets daily, with slow response times and high variability in answer quality. A knowledge base existed but wasn\'t queryable in a smart way.',
+    },
+    approach: {
+      it: 'Costruzione di un agente RAG con LangChain e OpenAI, knowledge base indicizzata con embedding vettoriali, interfaccia chat in React con streaming delle risposte. Pipeline di ingestione documenti automatizzata.',
+      en: 'Built a RAG agent with LangChain and OpenAI, knowledge base indexed with vector embeddings, React chat interface with response streaming. Automated document ingestion pipeline.',
+    },
+    result: {
+      it: '80% dei ticket risolti automaticamente senza intervento umano, tempo medio di risposta da ore a secondi, qualità delle risposte coerente e tracciabile. Il team di supporto si concentra ora solo sui casi complessi.',
+      en: '80% of tickets resolved automatically without human intervention, average response time from hours to seconds, consistent and traceable answer quality. The support team now focuses only on complex cases.',
+    },
+    longDesc: {
+      it: 'Agente AI conversazionale con architettura RAG: documenti indicizzati, retrieval semantico, generazione contestuale con OpenAI. Interfaccia chat React con streaming. Pipeline di ingestion automatica.',
+      en: 'Conversational AI agent with RAG architecture: indexed documents, semantic retrieval, contextual generation with OpenAI. React chat interface with streaming. Automatic ingestion pipeline.',
+    },
+    stack: ['Python', 'LangChain', 'OpenAI', 'React', 'Pinecone'],
+    area: 'ai',
+    featured: true,
+    filters: ['ai'],
+    cover: 'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=1200&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=1200&q=80',
+      'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=80',
+      'https://images.unsplash.com/photo-1655720828018-edd2daec9349?w=800&q=80',
+      'https://images.unsplash.com/photo-1676277791608-ac54525aa94d?w=800&q=80',
+    ],
+  },
+  {
+    slug: 'flux',
+    num: '06',
+    title: { it: 'Flux', en: 'Flux' },
+    role: { it: 'AI Developer', en: 'AI Developer' },
+    client: { it: 'Flux Systems', en: 'Flux Systems' },
+    year: '2025',
+    desc: {
+      it: 'Piattaforma di automazione intelligente dei flussi aziendali con agenti AI orchestrati.',
+      en: 'Intelligent business workflow automation platform with orchestrated AI agents.',
+    },
+    problem: {
+      it: 'L\'azienda gestiva decine di processi interni su strumenti diversi e disconnessi — email, fogli Excel, notifiche manuali. Ogni handoff tra team richiedeva intervento umano, con errori e ritardi costanti.',
+      en: 'The company managed dozens of internal processes across disconnected tools — emails, Excel sheets, manual notifications. Every team handoff required human intervention, with constant errors and delays.',
+    },
+    approach: {
+      it: 'Architettura multi-agente con n8n come orchestratore, agenti specializzati per ogni dominio (HR, finance, ops), integrazione con gli strumenti esistenti via API. Claude per il ragionamento complesso, GPT-4o per le task veloci.',
+      en: 'Multi-agent architecture with n8n as orchestrator, specialized agents per domain (HR, finance, ops), integration with existing tools via API. Claude for complex reasoning, GPT-4o for fast tasks.',
+    },
+    result: {
+      it: 'Oltre 30 flussi aziendali automatizzati, riduzione del 60% del tempo speso in task ripetitivi, zero errori di handoff tra team. Il sistema gestisce autonomamente migliaia di eventi ogni settimana.',
+      en: 'Over 30 business workflows automated, 60% reduction in time spent on repetitive tasks, zero handoff errors between teams. The system autonomously handles thousands of events every week.',
+    },
+    longDesc: {
+      it: 'Piattaforma di automazione multi-agente: n8n come orchestratore centrale, agenti AI per HR, finance e ops, integrazione con CRM, Slack, Google Workspace. Logica decisionale con Claude e GPT-4o.',
+      en: 'Multi-agent automation platform: n8n as central orchestrator, AI agents for HR, finance and ops, integration with CRM, Slack, Google Workspace. Decision logic with Claude and GPT-4o.',
+    },
+    stack: ['Python', 'n8n', 'Claude', 'OpenAI', 'LangChain'],
+    area: 'ai',
+    featured: true,
+    filters: ['ai'],
+    cover: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=80',
+      'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80',
+      'https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a?w=800&q=80',
+      'https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=800&q=80',
     ],
   },
 ]

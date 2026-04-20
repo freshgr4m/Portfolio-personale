@@ -4,6 +4,7 @@ import { useLang } from '../context/LangContext'
 import { PROJECTS } from '../data/projects'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import CtaRow from '../components/CtaRow'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -89,14 +90,12 @@ export default function ProjectDetail() {
         </div>
         <h1 className="post-h1">{p.title[lang]}<span className="tdot">.</span></h1>
         <p className="post-excerpt-hero">{p.desc[lang]}</p>
-        <div className="pd-hero-ctas">
-          <a href="mailto:hello@francescomancino.dev" className="hero-cta-primary">
-            {t('Scrivimi', 'Get in touch')} ↗
-          </a>
-          <Link to="/projects" className="hero-cta-secondary">
-            ← {t('Tutti i lavori', 'All work')}
-          </Link>
-        </div>
+        <CtaRow
+          primaryLabel={t('Scrivimi', 'Get in touch')}
+          secondaryTo="/projects"
+          secondaryLabel={t('Tutti i lavori', 'All work')}
+          className="pd-hero-ctas"
+        />
       </section>
 
       {/* ── META TABLE ── */}

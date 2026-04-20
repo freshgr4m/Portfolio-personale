@@ -11,6 +11,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ScrambleTextPlugin } from 'gsap/ScrambleTextPlugin'
 import ProjRow from '../components/ProjRow'
 import UnicornBg from '../components/UnicornBg'
+import CtaRow from '../components/CtaRow'
 
 gsap.registerPlugin(ScrollTrigger, ScrambleTextPlugin)
 
@@ -154,14 +155,11 @@ export default function Home() {
               'React interfaces, AI integration, Framer prototypes — for startups and product teams that want to ship.'
             )}
           </p>
-          <div className="hero-v2-cta-row">
-            <a href="mailto:hello@francescomancino.dev" className="hero-cta-primary">
-              {t('Scrivimi', 'Get in touch')} ↗
-            </a>
-            <Link to="/projects" className="hero-cta-secondary">
-              {t('Vedi i lavori', 'View work')}
-            </Link>
-          </div>
+          <CtaRow
+            primaryLabel={t('Scrivimi', 'Get in touch')}
+            secondaryTo="/projects"
+            secondaryLabel={t('Vedi i lavori', 'View work')}
+          />
         </div>
       </section>
 
