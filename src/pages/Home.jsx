@@ -10,6 +10,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ScrambleTextPlugin } from 'gsap/ScrambleTextPlugin'
 import ProjRow from '../components/ProjRow'
+import OutlineBtn from '../components/OutlineBtn'
 import UnicornBg from '../components/UnicornBg'
 import CtaRow from '../components/CtaRow'
 
@@ -256,9 +257,7 @@ export default function Home() {
           ))}
         </div>
         <div style={{ marginTop: 48, display: 'flex', justifyContent: 'center' }}>
-          <Link to="/projects" className="btn-outline-white">
-            {t('Archivio completo', 'Full archive')} →
-          </Link>
+          <OutlineBtn to="/projects" label={t('Archivio completo', 'Full archive')} magnetic />
         </div>
       </section>
 
@@ -370,9 +369,7 @@ export default function Home() {
           ))}
         </div>
         <div style={{ marginTop: 48, display: 'flex', justifyContent: 'center', paddingBottom: 'var(--pad-y)' }}>
-          <Link to="/journal" className="btn-outline-white">
-            {t('Tutti i post', 'All posts')} →
-          </Link>
+          <OutlineBtn to="/journal" label={t('Tutti i post', 'All posts')} magnetic />
         </div>
       </section>
 
