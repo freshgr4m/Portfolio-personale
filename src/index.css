@@ -236,8 +236,6 @@ a[href*="unicorn.studio"], a[href*="unicornstudio"] { display: none !important; 
 @media (max-width: 720px) { .proj-row { grid-template-columns: 40px 1fr; } .proj-arrow { display: none; } }
 
 .journal-section { border-top: 1px solid var(--line); }
-.journal-cta-mobile { display: none; }
-@media (max-width: 899px) { .journal-cta-desktop { display: none; } .journal-cta-mobile { display: flex; justify-content: center; padding: 24px var(--pad-x); } }
 .journal-section-head { padding: var(--pad-y) var(--pad-x) 0; }
 .journal-preview { display: grid; grid-template-columns: 1fr; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 @media (min-width: 900px) { .journal-preview { grid-template-columns: repeat(3, 1fr); } .journal-preview .jp-card + .jp-card { border-left: 1px solid var(--line); } }

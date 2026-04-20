@@ -348,9 +348,6 @@ export default function Home() {
             <div className="section-num">N° 04 / Journal</div>
             <h2 className="section-title">Journal</h2>
           </div>
-          <Link to="/journal" className="btn-outline-white journal-cta-desktop">
-            {t('Tutti i post', 'All posts')} →
-          </Link>
         </div>
         <div className="journal-preview stagger">
           {latest.map(p => (
@@ -372,7 +369,7 @@ export default function Home() {
             </Link>
           ))}
         </div>
-        <div className="journal-cta-mobile">
+        <div style={{ marginTop: 48, display: 'flex', justifyContent: 'center', paddingBottom: 'var(--pad-y)' }}>
           <Link to="/journal" className="btn-outline-white">
             {t('Tutti i post', 'All posts')} →
           </Link>
