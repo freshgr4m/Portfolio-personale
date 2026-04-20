@@ -57,7 +57,7 @@ export default function Cursor() {
     }
 
     const attach = () => {
-      document.querySelectorAll('.proj-cover, .work-proj-row').forEach(card => {
+      document.querySelectorAll('.proj-cover, .work-proj-row, .post-row').forEach(card => {
         card.removeEventListener('mouseenter', onCardEnter)
         card.removeEventListener('mouseleave', onCardLeave)
         card.addEventListener('mouseenter', onCardEnter)

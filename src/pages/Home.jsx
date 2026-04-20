@@ -80,7 +80,7 @@ export default function Home() {
 
       reveal('.now-num', { y: 20, end: 'top 70%' })
       reveal('.now-title', { y: 36, end: 'top 65%' })
-      reveal('.now-card', { y: 32, end: 'top 60%' })
+
 
       document.querySelectorAll('.section-title').forEach(el => reveal(el, { y: 30 }))
 
@@ -88,7 +88,7 @@ export default function Home() {
       reveal('.proj-card--mob', { y: 40, stagger: 0.1, end: 'top 45%' })
 
       reveal('.about-photo', { x: -40, y: 0, end: 'top 50%' })
-      reveal('.about-label', { y: 20 })
+
       reveal('.about-title', { y: 40, end: 'top 60%' })
       reveal('.about-bio', { y: 28, end: 'top 55%' })
       reveal('.about-fact', { y: 20, stagger: 0.08, end: 'top 50%' })
@@ -397,40 +397,26 @@ export default function Home() {
           </div>
         </div>
         <div className="contact-v2-table">
-          <div className="contact-v2-row">
-            <span className="contact-v2-key">Email</span>
-            <span className="contact-v2-val">
-              <a href="mailto:hello@francescomancino.dev">hello@francescomancino.dev</a>
-            </span>
-          </div>
-          <div className="contact-v2-row">
-            <span className="contact-v2-key">GitHub</span>
-            <span className="contact-v2-val">
-              <a href="https://github.com/fmancino" target="_blank" rel="noopener noreferrer">@fmancino</a>
-            </span>
-          </div>
-          <div className="contact-v2-row">
-            <span className="contact-v2-key">LinkedIn</span>
-            <span className="contact-v2-val">
-              <a href="https://linkedin.com/in/francescomancino" target="_blank" rel="noopener noreferrer">in/francescomancino</a>
-            </span>
-          </div>
-          <div className="contact-v2-row">
-            <span className="contact-v2-key">X / Twitter</span>
-            <span className="contact-v2-val">
-              <a href="https://x.com/fmancino_dev" target="_blank" rel="noopener noreferrer">@fmancino_dev</a>
-            </span>
-          </div>
-          <div className="contact-v2-row">
-            <span className="contact-v2-key">Read.cv</span>
-            <span className="contact-v2-val">
-              <a href="https://read.cv/fmancino" target="_blank" rel="noopener noreferrer">read.cv/fmancino</a>
-            </span>
-          </div>
-          <div className="contact-v2-row">
-            <span className="contact-v2-key">Location</span>
-            <span className="contact-v2-val">Italy · EU · Remote</span>
-          </div>
+          {[
+            { key: 'Email',      val: 'mancinofrancesco91@gmail.com', href: 'mailto:mancinofrancesco91@gmail.com' },
+            { key: 'GitHub',     val: '@freshgr4m',                   href: 'https://github.com/freshgr4m' },
+            { key: 'LinkedIn',   val: 'in/francescomancino',          href: 'https://linkedin.com/in/francescomancino' },
+            { key: 'X / Twitter',val: '@fmancino_dev',                href: 'https://x.com/fmancino_dev' },
+            { key: 'Location',   val: 'Roma · EU · Remote',           href: null },
+          ].map(({ key, val, href }) => (
+            <div key={key} className="contact-v2-row">
+              <span className="contact-v2-key">{key}</span>
+              <span className="contact-v2-val">
+                {href ? <a href={href} target={href.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer">{val}</a> : val}
+              </span>
+              <span className="contact-v2-arrow">
+                <svg viewBox="0 0 24 24" fill="none" width="14" height="14">
+                  <line x1="5" y1="19" x2="19" y2="5" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                  <polyline points="8,5 19,5 19,16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </span>
+            </div>
+          ))}
         </div>
       </section>
 

@@ -1,5 +1,6 @@
 import { useRef, useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
+import { scrollToSection } from '../utils/scrollTo'
 import { useLang } from '../context/LangContext'
 import { gsap } from 'gsap'
 
@@ -94,6 +95,15 @@ export default function Navbar() {
     { to: '/projects', label: t('Lavori', 'Work') },
     { to: '/journal', label: 'Journal' },
   ]
+  const anchorLinks = [
+    { id: 'about', label: t('Chi sono', 'About') },
+    { id: 'contact', label: t('Contatti', 'Contact') },
+  ]
+
+  function scrollTo(id) {
+    setOpen(false)
+    scrollToSection(id)
+  }
 
   return (
     <>
@@ -106,6 +116,11 @@ export default function Navbar() {
               <NavLink key={l.to} to={l.to} end={l.end} className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>
                 {l.label}
               </NavLink>
+            ))}
+            {anchorLinks.map(l => (
+              <button key={l.id} className="nav-link" onClick={() => scrollTo(l.id)}>
+                {l.label}
+              </button>
             ))}
           </div>
 
@@ -149,6 +164,12 @@ export default function Navbar() {
               <span className="mob-link-num">0{i + 1}</span>
               {l.label}
             </NavLink>
+          ))}
+          {anchorLinks.map((l, i) => (
+            <button key={l.id} className="mob-link" onClick={() => scrollTo(l.id)}>
+              <span className="mob-link-num">0{links.length + i + 1}</span>
+              {l.label}
+            </button>
           ))}
           <div className="mob-footer">
             <a href="mailto:hello@francescomancino.dev" className="mob-email">
