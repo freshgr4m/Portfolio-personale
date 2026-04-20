@@ -192,6 +192,7 @@ export const PROJECTS = [
     area: 'ai',
     featured: true,
     filters: ['ai'],
+    wip: true,
     cover: 'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=1200&q=80',
     images: [
       'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=1200&q=80',

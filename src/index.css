@@ -445,6 +445,38 @@ html { scrollbar-color: var(--line) var(--bg); scrollbar-width: thin; }
 @media (max-width: 820px) { .proj-grid { grid-template-columns: 1fr; gap: 20px; } }
 .proj-card { display: flex; flex-direction: column; gap: 14px; text-decoration: none; color: inherit; border-radius: 12px; overflow: hidden; }
 .proj-cover { position: relative; aspect-ratio: 3/2; overflow: hidden; border: 1px solid var(--line); background: #0e0e0e; isolation: isolate; border-radius: 12px; box-shadow: 0 8px 40px rgba(0,0,0,0.45), 0 2px 8px rgba(0,0,0,0.25); }
+.wip-stripe {
+  position: absolute; top: 50%; left: -35%; right: -35%;
+  transform: translateY(-50%) rotate(-11deg);
+  z-index: 4; height: 68px;
+  pointer-events: none; overflow: hidden;
+  background: #f5c800;
+}
+.wip-stripe::before,
+.wip-stripe::after {
+  content: '';
+  position: absolute; left: 0; right: 0; height: 10px;
+  background-image: repeating-linear-gradient(-45deg, #1a1200, #1a1200 7px, #f5c800 7px, #f5c800 14px);
+  background-size: 19.8px 10px;
+  animation: wipBorderScroll 0.5s linear infinite;
+}
+.wip-stripe::before { top: 0; }
+.wip-stripe::after  { bottom: 0; }
+@keyframes wipBorderScroll {
+  from { background-position: 0 0; }
+  to   { background-position: -19.8px 0; }
+}
+.wip-stripe-track {
+  position: absolute; top: 10px; bottom: 10px; left: 0;
+  display: flex; align-items: center;
+  white-space: nowrap;
+  animation: wipScroll 22s linear infinite;
+  font-family: var(--f-display); font-size: 36px; font-weight: 900;
+  line-height: 1; letter-spacing: -0.02em; text-transform: uppercase; color: #1a1200;
+}
+.wip-stripe-track span { padding: 0 24px; flex-shrink: 0; }
+.wip-stripe-track span::after { content: ' ·'; }
+@keyframes wipScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 .card-arrow-btn { position: absolute; bottom: 14px; right: 14px; z-index: 6; width: 40px; height: 40px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; transition: transform .35s cubic-bezier(.2,.8,.2,1); }
 .card-arrow-btn svg { width: 16px; height: 16px; color: #000; }
 .proj-card:hover .card-arrow-btn { transform: rotate(45deg); }

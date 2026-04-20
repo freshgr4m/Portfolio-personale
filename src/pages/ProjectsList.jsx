@@ -82,6 +82,14 @@ export default function ProjectsList() {
               <Link key={p.slug} to={`/projects/${p.slug}`} className="proj-card">
                 <div className={`proj-cover cover-tint-${p.area}`}>
                   {p.cover && <img src={p.cover} alt={p.title[lang]} className="proj-cover-img" />}
+                  {p.wip && (
+                    <div className="wip-stripe" aria-hidden="true">
+                      <div className="wip-stripe-track">
+                        {[...Array(8)].map((_, i) => <span key={i}>Work in Progress</span>)}
+                        {[...Array(8)].map((_, i) => <span key={i + 8}>Work in Progress</span>)}
+                      </div>
+                    </div>
+                  )}
                   <div className="cover-inner">
                     <div className="cover-topbar">
                       <span className="cover-num">{p.num} · {p.year}</span>
