@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useLang } from '../context/LangContext'
-import { PROJECTS, AREA_LABEL } from '../data/projects'
+import { PROJECTS } from '../data/projects'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -15,45 +15,42 @@ export default function ProjectDetail() {
 
   const idx = PROJECTS.findIndex(p => p.slug === slug)
   const p = PROJECTS[idx]
+  const prev = p ? PROJECTS[(idx - 1 + PROJECTS.length) % PROJECTS.length] : null
   const next = p ? PROJECTS[(idx + 1) % PROJECTS.length] : null
 
   useEffect(() => {
     if (!p) return
     const ctx = gsap.context(() => {
-      gsap.set('.pd-title-word', { yPercent: 110 })
-      gsap.set('.pd-header-tag', { opacity: 0, y: 10 })
-      gsap.set('.pd-meta-row', { opacity: 0, y: 14 })
-      gsap.set('.pd-brief', { opacity: 0, y: 18 })
+      gsap.set('.post-tag-pill',      { opacity: 0, y: 10 })
+      gsap.set('.post-h1',            { opacity: 0, y: 28 })
+      gsap.set('.post-excerpt-hero',  { opacity: 0, y: 18 })
+      gsap.set('.post-meta-strip',    { opacity: 0 })
 
       const tl = gsap.timeline({ defaults: { ease: 'power4.out' } })
-      tl.to('.pd-header-tag', { opacity: 1, y: 0, duration: 0.5 }, 0.05)
-        .to('.pd-title-word', { yPercent: 0, duration: 1, stagger: 0.09 }, 0.15)
-        .to('.pd-meta-row',  { opacity: 1, y: 0, duration: 0.6 }, 0.55)
-        .to('.pd-brief',     { opacity: 1, y: 0, duration: 0.6 }, 0.68)
+      tl.to('.post-tag-pill',     { opacity: 1, y: 0, duration: 0.5, stagger: 0.07 }, 0.05)
+        .to('.post-h1',           { opacity: 1, y: 0, duration: 0.9 }, 0.2)
+        .to('.post-excerpt-hero', { opacity: 1, y: 0, duration: 0.6 }, 0.55)
+        .to('.post-meta-strip',   { opacity: 1, duration: 0.5 }, 0.65)
 
-      gsap.from('.pd-gal-main', {
-        opacity: 0, y: 44, duration: 1, ease: 'power3.out',
+      gsap.from('.stat-cell', {
+        opacity: 0, y: 20, duration: 0.6, ease: 'power3.out', stagger: 0.08,
+        scrollTrigger: { trigger: '.stat-strip', start: 'top 90%', once: true },
+      })
+      gsap.from('.pd-cover img', {
+        opacity: 0, scale: 1.04, duration: 1.2, ease: 'power3.out',
+        scrollTrigger: { trigger: '.pd-cover', start: 'top 88%', once: true },
+      })
+      gsap.from('.pd-section', {
+        opacity: 0, y: 28, duration: 0.7, ease: 'power3.out', stagger: 0.12,
+        scrollTrigger: { trigger: '.pd-section', start: 'top 88%', once: true },
+      })
+      gsap.from('.pd-gallery-item', {
+        opacity: 0, y: 24, duration: 0.6, ease: 'power3.out', stagger: 0.1,
         scrollTrigger: { trigger: '.pd-gallery', start: 'top 88%', once: true },
       })
-      gsap.from('.pd-gal-side', {
-        opacity: 0, y: 44, duration: 1, ease: 'power3.out', delay: 0.12,
-        scrollTrigger: { trigger: '.pd-gallery', start: 'top 88%', once: true },
-      })
-      gsap.from('.pd-gal-row img', {
-        opacity: 0, y: 36, duration: 0.8, ease: 'power3.out', stagger: 0.1,
-        scrollTrigger: { trigger: '.pd-gal-row', start: 'top 88%', once: true },
-      })
-      gsap.from('.pd-info-col', {
-        opacity: 0, y: 36, duration: 0.8, ease: 'power3.out',
-        scrollTrigger: { trigger: '.pd-content', start: 'top 85%', once: true },
-      })
-      gsap.from('.pd-body-col', {
-        opacity: 0, y: 36, duration: 0.8, ease: 'power3.out', delay: 0.1,
-        scrollTrigger: { trigger: '.pd-content', start: 'top 85%', once: true },
-      })
-      gsap.from('.pd-next-row', {
-        opacity: 0, y: 28, duration: 0.7, ease: 'power3.out',
-        scrollTrigger: { trigger: '.pd-next-row', start: 'top 90%', once: true },
+      gsap.from('.post-nav', {
+        opacity: 0, y: 20, duration: 0.6, ease: 'power3.out',
+        scrollTrigger: { trigger: '.post-nav', start: 'top 95%', once: true },
       })
     }, pageRef)
     return () => ctx.revert()
@@ -71,133 +68,107 @@ export default function ProjectDetail() {
     </div>
   )
 
-  const imgs = p.images?.length ? p.images : p.cover ? [p.cover] : []
+  const heroImg = p.cover || p.images?.[0]
+  const galleryImgs = p.images?.length > 1 ? p.images.slice(1) : []
+
+  const sections = [
+    { num: '01', label: t('Problema', 'Problem'),   text: p.problem?.[lang] },
+    { num: '02', label: t('Approccio', 'Approach'), text: p.approach?.[lang] },
+    { num: '03', label: t('Risultato', 'Result'),   text: p.result?.[lang] },
+  ].filter(s => s.text)
 
   return (
     <div className="page-enter" ref={pageRef}>
 
-      {/* ── HEADER ── */}
-      <div className="pd-header wrap">
-        <Link to="/projects" className="pd-back">← {t('Tutti i lavori', 'All work')}</Link>
-
-        <div className="pd-header-top">
-          <span className="section-num">N° {p.num}</span>
-          <span className="pd-header-tag cover-tag">{AREA_LABEL[p.area]}</span>
+      {/* ── HERO ── */}
+      <section className="post-hero">
+        <div className="post-tags">
+          <span className="post-tag-pill">{p.area.toUpperCase()}</span>
+          <span className="post-tag-pill">{p.year}</span>
+          <span className="post-tag-pill">{p.role[lang]}</span>
         </div>
-
-        <div className="pd-title-wrap">
-          {p.title[lang].split(' ').map((word, i) => (
-            <div key={i} className="pd-title-clip">
-              <span className="pd-title-word">{word}</span>
-            </div>
-          ))}
-          <div className="pd-title-clip">
-            <span className="pd-title-word"><span className="tdot">.</span></span>
-          </div>
+        <h1 className="post-h1">{p.title[lang]}<span className="tdot">.</span></h1>
+        <p className="post-excerpt-hero">{p.desc[lang]}</p>
+        <div className="pd-hero-ctas">
+          <a href="mailto:hello@francescomancino.dev" className="hero-cta-primary">
+            {t('Scrivimi', 'Get in touch')} ↗
+          </a>
+          <Link to="/projects" className="hero-cta-secondary">
+            ← {t('Tutti i lavori', 'All work')}
+          </Link>
         </div>
+      </section>
 
-        <div className="pd-meta-row">
-          <span className="mono">{p.year}</span>
-          <span className="pd-meta-sep mono">·</span>
-          <span className="mono">{p.role[lang]}</span>
-          <span className="pd-meta-sep mono">·</span>
-          <span className="mono" style={{ color: 'var(--accent)' }}>{AREA_LABEL[p.area]}</span>
+      {/* ── META TABLE ── */}
+      <div className="stat-strip">
+        <div className="stat-cell">
+          <div className="stat-k">{t('Ruolo', 'Role')}</div>
+          <div className="stat-v">{p.role[lang]}</div>
         </div>
-
-        <p className="pd-brief">{p.desc[lang]}</p>
+        <div className="stat-cell">
+          <div className="stat-k">{t('Cliente', 'Client')}</div>
+          <div className="stat-v">{p.client?.[lang] ?? '—'}</div>
+        </div>
+        <div className="stat-cell">
+          <div className="stat-k">{t('Anno', 'Year')}</div>
+          <div className="stat-v">{p.year}</div>
+        </div>
+        <div className="stat-cell">
+          <div className="stat-k">{t('Stack', 'Stack')}</div>
+          <div className="stat-v">{p.stack.filter(s => s !== 'TypeScript').slice(0, 2).join(' · ')}</div>
+        </div>
       </div>
 
-      {/* ── GALLERY 5 IMMAGINI ── */}
-      {imgs.length > 0 && (
-        <div className="pd-gallery wrap">
-          {/* Riga 1: immagine grande + 1 laterale */}
-          <div className="pd-gal-top">
-            <div className="pd-gal-main">
-              <img src={imgs[0]} alt={p.title[lang]} />
-            </div>
-            {imgs[1] && (
-              <div className="pd-gal-side">
-                <img src={imgs[1]} alt={`${p.title[lang]} 2`} />
-              </div>
-            )}
-          </div>
-
-          {/* Riga 2: 3 immagini uguali */}
-          {imgs.slice(2, 5).length > 0 && (
-            <div className="pd-gal-row">
-              {imgs.slice(2, 5).map((src, i) => (
-                <img key={i} src={src} alt={`${p.title[lang]} ${i + 3}`} />
-              ))}
-            </div>
-          )}
+      {/* ── COVER ── */}
+      {heroImg && (
+        <div className="pd-cover">
+          <img src={heroImg} alt={p.title[lang]} />
         </div>
       )}
 
-      {/* ── CONTENT ── */}
-      <div className="pd-content wrap">
+      {/* ── BODY SECTIONS ── */}
+      {sections.map(({ num, label, text }) => (
+        <section key={num} className="pd-section wrap">
+          <div className="pd-body-grid">
+            <div className="pd-section-label mono">
+              <span className="pd-section-n">{num} /</span> {label}
+            </div>
+            <p className="pd-section-text">{text}</p>
+          </div>
+        </section>
+      ))}
 
-        {/* Colonna sinistra: info + stack + cta */}
-        <div className="pd-info-col">
-          <div className="pd-info-block">
-            <span className="mono pd-label-sm">{t('Stack', 'Stack')}</span>
-            <div className="pd-stack">
-              {p.stack.map(s => <span key={s} className="stack-pill">{s}</span>)}
+      {/* ── GALLERY ── */}
+      {galleryImgs.length > 0 && (
+        <section className="pd-section wrap">
+          <div className="pd-body-grid pd-body-grid--full">
+            <div className="pd-section-label mono">
+              <span className="pd-section-n">04 /</span> {t('Gallery', 'Gallery')}
+            </div>
+            <div className="pd-gallery">
+              {galleryImgs.map((src, i) => (
+                <div key={i} className="pd-gallery-item">
+                  <img src={src} alt={`${p.title[lang]} ${i + 2}`} />
+                </div>
+              ))}
             </div>
           </div>
+        </section>
+      )}
 
-          <div className="pd-info-block">
-            <span className="mono pd-label-sm">{t('Ruolo', 'Role')}</span>
-            <div className="pd-info-val">{p.role[lang]}</div>
-          </div>
 
-          <div className="pd-info-block">
-            <span className="mono pd-label-sm">{t('Anno', 'Year')}</span>
-            <div className="pd-info-val">{p.year}</div>
-          </div>
-
-          <div className="pd-info-block">
-            <span className="mono pd-label-sm">{t('Area', 'Area')}</span>
-            <div className="pd-info-val">{AREA_LABEL[p.area]}</div>
-          </div>
-
-          <div className="pd-ctas">
-            <a href="mailto:hello@francescomancino.dev" className="hero-cta-primary">
-              {t('Scrivimi', 'Get in touch')} ↗
-            </a>
-            <Link to="/projects" className="hero-cta-secondary">
-              {t('Tutti i lavori', 'All work')}
-            </Link>
-          </div>
-        </div>
-
-        {/* Colonna destra: overview */}
-        <div className="pd-body-col">
-          <span className="mono pd-label-sm">{t('Il Progetto', 'The Project')}</span>
-          <p className="pd-long">{p.longDesc[lang]}</p>
-        </div>
-
-      </div>
-
-      {/* ── NEXT PROJECT ── */}
-      {next && (
-        <div className="wrap">
-          <Link to={`/projects/${next.slug}`} className="pd-next-row">
-            <div>
-              <div className="mono" style={{ opacity: 0.45, marginBottom: 10 }}>
-                {t('Prossimo progetto', 'Next project')}
-              </div>
-              <div className="pd-next-title">
-                {next.title[lang]}<span className="tdot">.</span>
-              </div>
-            </div>
-            <span className="card-arrow-btn" style={{ position: 'static', flexShrink: 0 }}>
-              <svg viewBox="0 0 24 24" fill="none" width="16" height="16">
-                <line x1="5" y1="19" x2="19" y2="5" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                <polyline points="8,5 19,5 19,16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </span>
+      {/* ── PAGINATION ── */}
+      {prev && next && (
+        <nav className="post-nav">
+          <Link to={`/projects/${prev.slug}`}>
+            <span className="post-nav-label">← {t('Progetto precedente', 'Previous project')}</span>
+            <span className="post-nav-title">{prev.title[lang]}<span className="tdot">.</span></span>
           </Link>
-        </div>
+          <Link to={`/projects/${next.slug}`} className="next">
+            <span className="post-nav-label">{t('Prossimo progetto', 'Next project')} →</span>
+            <span className="post-nav-title">{next.title[lang]}<span className="tdot">.</span></span>
+          </Link>
+        </nav>
       )}
 
     </div>

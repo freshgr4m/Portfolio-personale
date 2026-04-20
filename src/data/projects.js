@@ -6,10 +6,23 @@ export const PROJECTS = [
     num: '01',
     title: { it: 'Gestionale Enterprise', en: 'Enterprise ERP' },
     role: { it: 'Full-Stack', en: 'Full-Stack' },
+    client: { it: 'Azienda Enterprise', en: 'Enterprise Co.' },
     year: '2024',
     desc: {
       it: 'UI/UX e frontend per applicazione gestionale interna.',
       en: 'UI/UX and frontend for an internal ERP application.',
+    },
+    problem: {
+      it: 'Il team operativo perdeva ore in processi manuali e interfacce datate — dati frammentati, zero visibilità in tempo reale, flussi ridondanti che rallentavano ogni azione.',
+      en: 'The ops team was losing hours to manual workflows and outdated interfaces — fragmented data, zero real-time visibility, redundant flows that slowed every action.',
+    },
+    approach: {
+      it: 'Ridisegno completo dell\'interfaccia e sviluppo del frontend con React e un design system interno. Priorità alle azioni più frequenti, layout a colpo d\'occhio, zero ridondanza.',
+      en: 'Complete UI redesign and frontend build with React and an internal design system. Priority given to the most frequent actions, glanceable layouts, zero redundancy.',
+    },
+    result: {
+      it: 'Riduzione degli step per le operazioni comuni, adozione immediata senza formazione, interfaccia che oggi il team usa ogni giorno senza frizioni.',
+      en: 'Fewer steps for common operations, immediate adoption without training, an interface the team uses daily without friction.',
     },
     longDesc: {
       it: 'Ridisegno completo dell\'interfaccia e sviluppo del frontend per un gestionale interno usato quotidianamente dai team operativi. L\'obiettivo era ridurre gli step ripetitivi, rendere i dati leggibili a colpo d\'occhio e velocizzare le azioni più frequenti.',
@@ -33,10 +46,23 @@ export const PROJECTS = [
     num: '02',
     title: { it: 'Gestionale React', en: 'React ERP' },
     role: { it: 'Full-Stack', en: 'Full-Stack' },
+    client: { it: 'Azienda CRM', en: 'CRM Company' },
     year: '2025',
     desc: {
       it: 'Architettura frontend con React e Vite per CRM aziendale.',
       en: 'Frontend architecture with React and Vite for a company CRM.',
+    },
+    problem: {
+      it: 'Il CRM esistente era lento, difficile da manutenere e non scalabile. Il team di sviluppo perdeva tempo su una base di codice fragile invece di costruire funzionalità.',
+      en: 'The existing CRM was slow, hard to maintain and not scalable. The dev team was losing time on a fragile codebase instead of building features.',
+    },
+    approach: {
+      it: 'Architettura frontend from-scratch con Vite, struttura a moduli, routing dichiarativo, data layer con Zustand e componenti condivisi. Attenzione specifica a build time, DX e manutenibilità a lungo termine.',
+      en: 'From-scratch frontend architecture with Vite, modular structure, declarative routing, Zustand data layer and shared components. Specific focus on build time, DX and long-term maintainability.',
+    },
+    result: {
+      it: 'Build time drasticamente ridotto, codebase modulare e facile da estendere, developer experience nettamente migliorata. Onboarding dei nuovi sviluppatori ridotto da giorni a ore.',
+      en: 'Drastically reduced build time, modular and easily extensible codebase, significantly improved developer experience. New dev onboarding cut from days to hours.',
     },
     longDesc: {
       it: 'Architettura frontend from-scratch per un CRM aziendale: setup Vite, struttura a moduli, routing, data layer, componenti condivisi. Attenzione specifica a build time, DX e manutenibilità.',
@@ -60,10 +86,23 @@ export const PROJECTS = [
     num: '03',
     title: { it: 'Portfolio Lorenzo Piovani', en: 'Lorenzo Piovani Portfolio' },
     role: { it: 'Design', en: 'Design' },
+    client: { it: 'Lorenzo Piovani', en: 'Lorenzo Piovani' },
     year: '2024',
     desc: {
       it: 'Portfolio interattivo sviluppato in Framer.',
       en: 'Interactive portfolio built in Framer.',
+    },
+    problem: {
+      it: 'Il cliente aveva bisogno di un portfolio online che riflettesse la sua identità visiva, con animazioni fluide, senza dipendere da un developer per ogni piccolo aggiornamento.',
+      en: 'The client needed an online portfolio reflecting his visual identity, with smooth animations, without depending on a developer for every small update.',
+    },
+    approach: {
+      it: 'Portfolio costruito interamente in Framer — dalle interazioni alle animazioni di scroll, fino al sistema di pubblicazione autonomo con CMS integrato. Nessun custom code, massima flessibilità.',
+      en: 'Portfolio built entirely in Framer — from interactions to scroll animations, down to an autonomous publishing system with integrated CMS. No custom code, maximum flexibility.',
+    },
+    result: {
+      it: 'Sito live in due settimane, cliente autonomo nella gestione dei contenuti, animazioni fluide senza codice custom. Il cliente aggiorna da solo senza passare da me.',
+      en: 'Site live in two weeks, client self-sufficient in content management, smooth animations without custom code. The client updates independently without going through me.',
     },
     longDesc: {
       it: 'Portfolio personale del cliente costruito interamente in Framer — dalle interazioni alle animazioni di scroll, fino al sistema di pubblicazione senza codice custom.',
@@ -87,10 +126,23 @@ export const PROJECTS = [
     num: '04',
     title: { it: 'Strane Donne', en: 'Strane Donne' },
     role: { it: 'Web', en: 'Web' },
+    client: { it: 'Strane Donne', en: 'Strane Donne' },
     year: '2023',
     desc: {
       it: 'Sito aziendale WordPress.',
       en: 'WordPress company website.',
+    },
+    problem: {
+      it: 'Il team aveva bisogno di una presenza online professionale e aggiornabile in autonomia — senza passare da un developer a ogni modifica, con SEO solida fin da subito.',
+      en: 'The team needed a professional online presence they could update independently — without going through a developer for every change, with solid SEO from day one.',
+    },
+    approach: {
+      it: 'Sito su WordPress con struttura editoriale definita, tema custom leggero, ottimizzazione SEO on-page. Focus su chiarezza dei contenuti, velocità di caricamento e autonomia del team.',
+      en: 'WordPress site with defined editorial structure, lightweight custom theme, on-page SEO optimization. Focus on content clarity, loading speed and team autonomy.',
+    },
+    result: {
+      it: 'Team autonomo nella gestione da subito, contenuti aggiornati regolarmente senza interventi tecnici, presenza online professionale costruita in tempi rapidi e a costi contenuti.',
+      en: 'Team self-sufficient from day one, content regularly updated without technical intervention, professional online presence built quickly and cost-effectively.',
     },
     longDesc: {
       it: 'Sito aziendale su WordPress: struttura editoriale, tema custom, gestione contenuti autonoma da parte del team. Focus su chiarezza e velocità.',
