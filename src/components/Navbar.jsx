@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import { useLang } from '../context/LangContext'
 import { gsap } from 'gsap'
 
@@ -54,20 +54,8 @@ function LangToggle() {
   return (
     <div className="lang-toggle">
       <div className="lang-indicator" ref={indicatorRef} />
-      <button
-        ref={itRef}
-        className={`lang-opt${lang === 'it' ? ' active' : ''}`}
-        onClick={() => setLang('it')}
-      >
-        IT
-      </button>
-      <button
-        ref={enRef}
-        className={`lang-opt${lang === 'en' ? ' active' : ''}`}
-        onClick={() => setLang('en')}
-      >
-        EN
-      </button>
+      <button ref={itRef} className={`lang-opt${lang === 'it' ? ' active' : ''}`} onClick={() => setLang('it')}>IT</button>
+      <button ref={enRef} className={`lang-opt${lang === 'en' ? ' active' : ''}`} onClick={() => setLang('en')}>EN</button>
     </div>
   )
 }
@@ -75,45 +63,101 @@ function LangToggle() {
 export default function Navbar() {
   const { lang } = useLang()
   const t = (it, en) => (lang === 'it' ? it : en)
+  const [open, setOpen] = useState(false)
+  const overlayRef = useRef(null)
+  const linksRef = useRef(null)
+  const location = useLocation()
+
+  useEffect(() => { setOpen(false) }, [location.pathname])
+
+  useEffect(() => {
+    const overlay = overlayRef.current
+    const items = linksRef.current?.querySelectorAll('.mob-link, .mob-footer')
+    if (!overlay) return
+
+    if (open) {
+      document.body.style.overflow = 'hidden'
+      gsap.set(overlay, { display: 'flex' })
+      gsap.fromTo(overlay, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: 'power2.out' })
+      gsap.fromTo(items, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out', stagger: 0.07, delay: 0.1 })
+    } else {
+      document.body.style.overflow = ''
+      gsap.to(overlay, {
+        opacity: 0, duration: 0.25, ease: 'power2.in',
+        onComplete: () => gsap.set(overlay, { display: 'none' }),
+      })
+    }
+  }, [open])
+
+  const links = [
+    { to: '/', label: t('Index', 'Index'), end: true },
+    { to: '/projects', label: t('Lavori', 'Work') },
+    { to: '/journal', label: 'Journal' },
+  ]
 
   return (
-    <header className="nav-header">
-      <nav className="nav">
-        <Link to="/" className="nav-brand" aria-label="Home">
-          Francesco Mancino
-        </Link>
+    <>
+      <header className="nav-header">
+        <nav className="nav">
+          <Link to="/" className="nav-brand" aria-label="Home">Francesco Mancino</Link>
 
-        <NavLink to="/" end className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>
-          {t('Index', 'Index')}
-        </NavLink>
-        <NavLink to="/projects" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>
-          {t('Lavori', 'Work')}
-        </NavLink>
-        <NavLink to="/journal" className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>
-          Journal
-        </NavLink>
+          <div className="nav-links-desktop">
+            {links.map(l => (
+              <NavLink key={l.to} to={l.to} end={l.end} className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}>
+                {l.label}
+              </NavLink>
+            ))}
+          </div>
 
-        <div className="nav-right">
-          <a href="mailto:hello@francescomancino.dev" className="nav-cta">
-            hello@francescomancino.dev ↗
-          </a>
-          <LangToggle />
+          <div className="nav-right">
+            <a href="mailto:hello@francescomancino.dev" className="nav-cta nav-cta--desktop">
+              hello@francescomancino.dev ↗
+            </a>
+            <LangToggle />
+            <button className="nav-burger" onClick={() => setOpen(o => !o)} aria-label="Menu">
+              <span className={open ? 'burger-open' : ''} />
+              <span className={open ? 'burger-open' : ''} />
+            </button>
+          </div>
+        </nav>
+
+        <div className="nav-strip">
+          <div className="nav-strip-left">
+            <span className="nav-strip-dot" />
+            <span>{t('Disponibile', 'Available')}</span>
+            <span className="nav-strip-sep">·</span>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            <span>{t('Roma, Italia', 'Rome, Italy')}</span>
+            <span className="nav-strip-sep">·</span>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+            <span>Remote</span>
+          </div>
+          <RomeClock />
         </div>
-      </nav>
+      </header>
 
-      <div className="nav-strip">
-        <div className="nav-strip-left">
-          <span className="nav-strip-dot" />
-          <span>{t('Disponibile', 'Available')}</span>
-          <span className="nav-strip-sep">·</span>
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-          <span>{t('Roma, Italia', 'Rome, Italy')}</span>
-          <span className="nav-strip-sep">·</span>
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-          <span>Remote</span>
-        </div>
-        <RomeClock />
+      {/* ── MOBILE OVERLAY — fuori dall'header per evitare stacking context di backdrop-filter ── */}
+      <div className="mob-overlay" ref={overlayRef} style={{ display: 'none' }}>
+        <nav className="mob-nav" ref={linksRef}>
+          {links.map((l, i) => (
+            <NavLink
+              key={l.to}
+              to={l.to}
+              end={l.end}
+              className={({ isActive }) => 'mob-link' + (isActive ? ' mob-link--active' : '')}
+            >
+              <span className="mob-link-num">0{i + 1}</span>
+              {l.label}
+            </NavLink>
+          ))}
+          <div className="mob-footer">
+            <a href="mailto:hello@francescomancino.dev" className="mob-email">
+              hello@francescomancino.dev ↗
+            </a>
+            <LangToggle />
+          </div>
+        </nav>
       </div>
-    </header>
+    </>
   )
 }

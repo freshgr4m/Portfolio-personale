@@ -49,6 +49,13 @@ export default function Cursor() {
       gsap.to(el, { scale: DEFAULT_SCALE, duration: 0.3, ease: 'power3.out' })
     }
 
+    const onPhotoEnter = () => {
+      gsap.to(el, { scale: DEFAULT_SCALE, duration: 0.3, ease: 'power3.out' })
+    }
+    const onPhotoLeave = () => {
+      gsap.to(el, { scale: DEFAULT_SCALE, duration: 0.3, ease: 'power3.out' })
+    }
+
     const attach = () => {
       document.querySelectorAll('.proj-cover, .work-proj-row').forEach(card => {
         card.removeEventListener('mouseenter', onCardEnter)
@@ -61,6 +68,12 @@ export default function Cursor() {
         card.removeEventListener('mouseleave', onJournalLeave)
         card.addEventListener('mouseenter', onJournalEnter)
         card.addEventListener('mouseleave', onJournalLeave)
+      })
+      document.querySelectorAll('.about-photo').forEach(el => {
+        el.removeEventListener('mouseenter', onPhotoEnter)
+        el.removeEventListener('mouseleave', onPhotoLeave)
+        el.addEventListener('mouseenter', onPhotoEnter)
+        el.addEventListener('mouseleave', onPhotoLeave)
       })
     }
     attach()

@@ -217,10 +217,12 @@ export default function Home() {
       {/* ── LAVORI IN EVIDENZA ── */}
       <section className="section" id="work">
         <div className="section-head">
-          <h2 className="section-title">
-            {t('Lavori', 'Selected')} <span className="amp">{t('selezionati', 'work')}</span>
-          </h2>
-          <span className="mono">(01 / 04)</span>
+          <div>
+            <div className="section-num">N° 01 / {t('Lavori selezionati', 'Selected work')}</div>
+            <h2 className="section-title">
+              {t('Lavori', 'Selected')} <span className="amp">{t('selezionati', 'work')}</span>
+            </h2>
+          </div>
         </div>
         <div className="work-proj-list">
           {featured.map(p => (
@@ -236,15 +238,8 @@ export default function Home() {
 
       {/* ── CHI SONO ── */}
       <section className="about" id="about">
-        <div className="about-photo">
-          <img src="/assets/portrait.png" alt={t('Ritratto', 'Portrait')} />
-          <div className="about-photo-corner" />
-        </div>
         <div className="about-body">
-          <div className="about-label">
-            <span className="mono">— {t('Chi sono', 'About')}</span>
-            <span className="mono">(02 / 04)</span>
-          </div>
+          <div className="section-num">N° 02 / {t('Chi sono', 'About')}</div>
           <h2 className="about-title">
             {t('Parto dal', 'I start from the')}{' '}
             <span className="amp">{t('problema', 'problem')}.</span>
@@ -263,7 +258,7 @@ export default function Home() {
               </div>
             </div>
             <div className="about-fact">
-              <div className="about-fact-k">{t('Base', 'Base')}</div>
+              <div className="about-fact-k">{t('Sede', 'Location')}</div>
               <div className="about-fact-v">
                 Roma, IT <span className="dot">◆</span> {t('Remote', 'Remote')}
               </div>
@@ -280,15 +275,18 @@ export default function Home() {
             </div>
           </div>
         </div>
+        <div className="about-photo">
+          <img src="/assets/portrait.png" alt={t('Ritratto', 'Portrait')} />
+        </div>
       </section>
 
       {/* ── SKILLS ── */}
       <section className="skills" id="skills">
         <div className="skills-head">
+          <div className="section-num">N° 03 / {t('Skill & strumenti', 'Skills & tools')}</div>
           <h2 className="section-title">
             {t('Skill', 'Skills')} <span className="amp">&amp; {t('strumenti', 'tools')}</span>
           </h2>
-          <span className="mono">(03 / 04)</span>
         </div>
         <div className="skills-grid">
           {SKILLS.map(s => (
@@ -314,13 +312,12 @@ export default function Home() {
       </section>
 
       {/* ── JOURNAL PREVIEW ── */}
-      <section className="section" style={{ background: 'var(--bg-2)' }}>
-        <div className="section-head">
-          <h2 className="section-title">
-            Journal{' '}
-            <span className="mono" style={{ fontSize: 14, marginLeft: 12 }}>(04 / 04)</span>
-
-          </h2>
+      <section className="journal-section" style={{ background: 'var(--bg-2)' }}>
+        <div className="section-head journal-section-head">
+          <div>
+            <div className="section-num">N° 04 / Journal</div>
+            <h2 className="section-title">Journal</h2>
+          </div>
           <Link to="/journal" className="btn-outline-white">
             {t('Tutti i post', 'All posts')} →
           </Link>
