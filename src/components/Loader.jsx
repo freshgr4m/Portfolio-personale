@@ -26,6 +26,9 @@ export default function Loader({ onComplete }) {
     gridRef.current.appendChild(frag)
     const blocks = gridRef.current.querySelectorAll('.loader-block')
 
+    gsap.set('.ln-word', { yPercent: -120, opacity: 0 })
+    gsap.set('.ln-meta', { opacity: 0, x: -20 })
+
     const tl = gsap.timeline({
       onComplete: () => {
         if (overlayRef.current) overlayRef.current.style.display = 'none'
@@ -48,19 +51,17 @@ export default function Loader({ onComplete }) {
     const isMobile = window.innerWidth < 900
 
     if (!isMobile) {
-      // nome entra dall'alto in stagger per parola
-      tl.from('.ln-word', {
-        yPercent: -120,
-        opacity: 0,
+      tl.to('.ln-word', {
+        yPercent: 0,
+        opacity: 1,
         duration: 0.7,
         stagger: 0.12,
         ease: 'power3.out',
       }, 0.2)
 
-      // ruolo e tag entrano
-      tl.from('.ln-meta', {
-        opacity: 0,
-        x: -20,
+      tl.to('.ln-meta', {
+        opacity: 1,
+        x: 0,
         duration: 0.5,
         ease: 'power2.out',
       }, 0.6)
