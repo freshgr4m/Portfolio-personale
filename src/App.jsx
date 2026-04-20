@@ -6,6 +6,7 @@ import Footer from './components/Footer'
 import ScrollToTop from './components/ScrollToTop'
 import Loader from './components/Loader'
 import Cursor from './components/Cursor'
+import ChatWidget from './components/ChatWidget'
 import Home from './pages/Home'
 import ProjectsList from './pages/ProjectsList'
 import ProjectDetail from './pages/ProjectDetail'
@@ -34,6 +35,7 @@ function AppInner() {
         </Routes>
       </main>
       <Footer />
+      <ChatWidget />
     </>
   )
 }
