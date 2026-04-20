@@ -174,7 +174,7 @@ a[href*="unicorn.studio"], a[href*="unicornstudio"] { display: none !important; 
 .hero-cta-secondary:hover { color: var(--fg); border-color: var(--fg); }
 .btn-outline-white { font-family: var(--f-display); font-size: 14px; font-weight: 500; color: var(--fg); border: 1px solid rgba(255,255,255,0.25); border-radius: 100px; padding: 10px 22px; white-space: nowrap; transition: background .2s, color .2s, border-color .2s; }
 .btn-outline-white:hover { background: var(--fg); color: var(--bg); border-color: var(--fg); }
-@media (max-width: 640px) { .hero-v2-bottom { grid-template-columns: 1fr; gap: 20px; } }
+@media (max-width: 640px) { .hero-v2-bottom { grid-template-columns: 1fr; gap: 20px; padding-bottom: 32px; } }
 
 /* ── CTA BUTTONS ── */
 .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
